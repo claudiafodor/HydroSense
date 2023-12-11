@@ -23,45 +23,39 @@ const char* password = "REPLACE_WITH_YOUR_PASSWORD";
 // Create AsyncWebServer object on port 80
 AsyncWebServer server(80);
 
-String readBME280Temperature() {
-  // Read temperature as Celsius (the default)
-  float t = bme.readTemperature();
-  // Convert temperature to Fahrenheit
-  //t = 1.8 * t + 32;
-  if (isnan(t)) {    
-    Serial.println("Failed to read from BME280 sensor!");
-    return "";
+String readTurbidity() {
+  int sensorValue = analogRead(A0);
+  float Turbidity = sensorValue * (5.0 / 1024.0);
+
+  if (Turbidity >= 20) {
+    return String("")
   }
   else {
-    Serial.println(t);
-    return String(t);
+    return String(Turbidity);
   }
 }
 
-String readBME280Humidity() {
-  float h = bme.readHumidity();
-  if (isnan(h)) {
-    Serial.println("Failed to read from BME280 sensor!");
-    return "";
-  }
-  else {
-    Serial.println(h);
-    return String(h);
-  }
+String readTDS() {
+
 }
 
-String readBME280Pressure() {
-  float p = bme.readPressure() / 100.0F;
-  if (isnan(p)) {
-    Serial.println("Failed to read from BME280 sensor!");
-    return "";
+String readTemp() {
+  int sensorPin = A0;  // LM35 connected to Analog Pin A0
+  int sensorValue = analogRead(sensorPin);   // read the sensor value
+  float temperatureC = (sensorValue * 5.0) / 1023 * 100;   // convert to temperature in Celsius
+  
+  if (temperatureC >= 100) {
+    return String("")
   }
   else {
-    Serial.println(p);
-    return String(p);
+    return String(temperatureC);
   }
+
 }
 
+String readPh() {
+
+}
 void setup(){
   // Serial port for debugging purposes
   Serial.begin(115200);
