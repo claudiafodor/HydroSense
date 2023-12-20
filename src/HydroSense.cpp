@@ -59,7 +59,12 @@ void setup(){
   Serial.begin(9600);
   
   bool status; 
-  
+
+  // Initialize SPIFFS
+  if(!SPIFFS.begin()){
+    Serial.println("An Error has occurred while mounting SPIFFS");
+    return;
+  }
 
   // Connect to Wi-Fi
   WiFi.begin(ssid, password);
