@@ -12,8 +12,9 @@ copies or substantial portions of the Software. -->
     body {
       min-width: 310px;
     	max-width: 800px;
-    	height: 400px;
       margin: 0 auto;
+      background: linear-gradient(41deg, rgba(9,9,121,1) 0%, rgba(99,37,195,1) 51%, rgba(0,255,244,1) 94%);
+      
     }
     h2 {
       font-family: Arial;
@@ -27,11 +28,12 @@ copies or substantial portions of the Software. -->
   <div id="chart-temperature" class="container"></div>
   <div id="chart-humidity" class="container"></div>
   <div id="chart-pressure" class="container"></div>
+  <div id="chart-temperature" class="container"></div>
 </body>
 <script>
 var chartT = new Highcharts.Chart({
   chart:{ renderTo : 'chart-temperature' },
-  title: { text: 'BME280 Temperature' },
+  title: { text: 'Temperature' },
   series: [{
     showInLegend: false,
     data: []
@@ -47,7 +49,6 @@ var chartT = new Highcharts.Chart({
   },
   yAxis: {
     title: { text: 'Temperature (Celsius)' }
-    //title: { text: 'Temperature (Fahrenheit)' }
   },
   credits: { enabled: false }
 });
@@ -71,7 +72,7 @@ setInterval(function ( ) {
 
 var chartH = new Highcharts.Chart({
   chart:{ renderTo:'chart-humidity' },
-  title: { text: 'BME280 Humidity' },
+  title: { text: 'Total Dissolved Solids' },
   series: [{
     showInLegend: false,
     data: []
@@ -86,7 +87,7 @@ var chartH = new Highcharts.Chart({
     dateTimeLabelFormats: { second: '%H:%M:%S' }
   },
   yAxis: {
-    title: { text: 'Humidity (%)' }
+    title: { text: 'TDS (%)' }
   },
   credits: { enabled: false }
 });
@@ -110,7 +111,7 @@ setInterval(function ( ) {
 
 var chartP = new Highcharts.Chart({
   chart:{ renderTo:'chart-pressure' },
-  title: { text: 'BME280 Pressure' },
+  title: { text: 'Turbidity' },
   series: [{
     showInLegend: false,
     data: []
@@ -126,7 +127,7 @@ var chartP = new Highcharts.Chart({
     dateTimeLabelFormats: { second: '%H:%M:%S' }
   },
   yAxis: {
-    title: { text: 'Pressure (hPa)' }
+    title: { text: 'Turbidity (ppm)' }
   },
   credits: { enabled: false }
 });
