@@ -1,37 +1,45 @@
 <!DOCTYPE HTML><html>
-<!-- Rui Santos - Complete project details at https://RandomNerdTutorials.com
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files.
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software. -->
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <style>
     body {
-      min-width: 310px;
-    	max-width: 800px;
-    	height: 400px;
-      margin: 0 auto;
+      background: linear-gradient(to top, #000046, #1cb5e0);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
     }
     h2 {
-      font-family: Arial;
+      font-family: "Lucida Console", monospace;
       font-size: 2.5rem;
       text-align: center;
+      padding: 2%;
+
+    }
+    .box {
+      background-color: aliceblue;
+      border-radius: 15px;
+      margin: 1%;
+      box-shadow: 10px 10px 5px black;
+      /*border: 1px solid aqua;*/
+    }
+    .graph {
+      width: 70%;
+      padding: 5%;
     }
   </style>
 </head>
 <body>
-  <h2>ESP Weather Station</h2>
-  <div id="chart-temperature" class="container"></div>
-  <div id="chart-humidity" class="container"></div>
-  <div id="chart-pressure" class="container"></div>
+  <h2 class="box">HydroSense Graphical Data</h2>
+  <div id="chart-temperature" class="box graph"></div>
+  <div id="chart-humidity" class="box graph"></div>
+  <div id="chart-pressure" class="box graph"></div>
 </body>
 <script>
 var chartT = new Highcharts.Chart({
   chart:{ renderTo : 'chart-temperature' },
-  title: { text: 'BME280 Temperature' },
+  title: { text: 'Temperature' },
   series: [{
     showInLegend: false,
     data: []
@@ -47,7 +55,6 @@ var chartT = new Highcharts.Chart({
   },
   yAxis: {
     title: { text: 'Temperature (Celsius)' }
-    //title: { text: 'Temperature (Fahrenheit)' }
   },
   credits: { enabled: false }
 });
@@ -71,7 +78,7 @@ setInterval(function ( ) {
 
 var chartH = new Highcharts.Chart({
   chart:{ renderTo:'chart-humidity' },
-  title: { text: 'BME280 Humidity' },
+  title: { text: 'Total Dissolved Solids' },
   series: [{
     showInLegend: false,
     data: []
@@ -86,7 +93,7 @@ var chartH = new Highcharts.Chart({
     dateTimeLabelFormats: { second: '%H:%M:%S' }
   },
   yAxis: {
-    title: { text: 'Humidity (%)' }
+    title: { text: 'TDS (%)' }
   },
   credits: { enabled: false }
 });
@@ -110,7 +117,7 @@ setInterval(function ( ) {
 
 var chartP = new Highcharts.Chart({
   chart:{ renderTo:'chart-pressure' },
-  title: { text: 'BME280 Pressure' },
+  title: { text: 'Turbidity' },
   series: [{
     showInLegend: false,
     data: []
@@ -126,7 +133,7 @@ var chartP = new Highcharts.Chart({
     dateTimeLabelFormats: { second: '%H:%M:%S' }
   },
   yAxis: {
-    title: { text: 'Pressure (hPa)' }
+    title: { text: 'Turbidity (ppm)' }
   },
   credits: { enabled: false }
 });
