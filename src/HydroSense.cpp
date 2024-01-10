@@ -54,6 +54,7 @@ String readTemp() {
 String readPh() {
 
 }
+
 void setup(){
   // Serial port for debugging purposes
   Serial.begin(9600);
@@ -70,7 +71,7 @@ void setup(){
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
-    Serial.println("Connecting to WiFi..");
+    //Serial.println("Connecting to WiFi..");
   }
 
   // Print ESP32 Local IP Address
@@ -92,6 +93,11 @@ void setup(){
 
   // Start server
   server.begin();
+
+  // Telemetry function testing
+  Serial.println(readTemp());
+  Serial.println(readTurbidity());
+  
 }
  
 void loop(){
