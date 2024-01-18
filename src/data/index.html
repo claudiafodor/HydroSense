@@ -3,13 +3,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <style>
-    body {
+    .main {
       background: linear-gradient(to top, #000046, #1cb5e0);
       display: flex;
       flex-direction: column;
       align-items: center;
-
+      padding-left: 200px;
     }
+
+    .sideBar {
+      width: 130px;
+      height: 100px;
+      position: fixed;
+      z-index: 1;
+      top: 20px;
+      left: 20px;
+      background: #eee;
+    }
+
     h2 {
       font-family: "Lucida Console", monospace;
       font-size: 2.5rem;
@@ -30,7 +41,10 @@
     }
   </style>
 </head>
-<body>
+<body class="main">
+  <div class="sideBar">
+
+  </div>
   <h2 class="box">HydroSense Graphical Data</h2>
   <div id="chart-temperature" class="box graph"></div>
   <div id="chart-humidity" class="box graph"></div>
