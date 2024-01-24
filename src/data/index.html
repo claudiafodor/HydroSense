@@ -3,14 +3,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <style>
+    body {
+      padding: 0 ;
+      margin: 0;
+    }
+
     .main {
-      background: linear-gradient(to top, #000046, #1cb5e0);
+      background-image: url("./wallpaper.jpeg");
+      background-attachment: fixed;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding-left: 200px;
     }
-
+    .header {
+      width: 100%;
+      padding: 60px;
+      filter: blur(5px);
+      position: fixed;
+      z-index: 2;
+    }
     .sideBar {
       width: 130px;
       height: 100px;
@@ -41,14 +53,17 @@
     }
   </style>
 </head>
-<body class="main">
-  <div class="sideBar">
+<body>
+  <header class="header">  </header>
+  <div class="main">
+    <div class="sideBar">
 
+    </div>
+    <h2 class="box">HydroSense Graphical Data</h2>
+    <div id="chart-temperature" class="box graph"></div>
+    <div id="chart-humidity" class="box graph"></div>
+    <div id="chart-pressure" class="box graph"></div>
   </div>
-  <h2 class="box">HydroSense Graphical Data</h2>
-  <div id="chart-temperature" class="box graph"></div>
-  <div id="chart-humidity" class="box graph"></div>
-  <div id="chart-pressure" class="box graph"></div>
 </body>
 <script>
 var chartT = new Highcharts.Chart({
