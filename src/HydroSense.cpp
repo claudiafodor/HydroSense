@@ -15,8 +15,8 @@
 //Adafruit_BME280 bme(BME_CS, BME_MOSI, BME_MISO, BME_SCK); // software SPI
 
 // Replace with your network credentials
-const char* ssid = "CoStCoE";
-const char* password = "CSAEA@244C";
+const char* ssid = "ORBI21";
+const char* password = "Smokecat5!";
 
 // Create AsyncWebServer object on port 80
 AsyncWebServer server(80);
