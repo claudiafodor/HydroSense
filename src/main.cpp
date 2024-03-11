@@ -16,10 +16,11 @@ void setup() {
 void loop() {
 
   readTurbidity();
+  readpH();
 
 }
 
-void readPH() {
+void readpH() {
   for(int i=0;i<10;i++)
   { 
     buf[i]=analogRead(SensorPin);
@@ -50,7 +51,7 @@ void readPH() {
 
 void readTurbidity() {
 
-  int sensorValue = analogRead(A0);
+  int sensorValue = analogRead(A1);
   float voltage = sensorValue * (5.0 / 1024.0);
  
   Serial.println ("Sensor Output (V):");
