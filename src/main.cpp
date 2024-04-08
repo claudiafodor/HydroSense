@@ -1,11 +1,12 @@
 #include <heltec.h>
-#define SensorPin 2
+#define SensorPin 3
 unsigned long int avgValue;
 float b;
 int buf[10],temp;
 
 void readTurbidity(); 
 void readpH();
+void readTDS();
 
 void setup() {
   
@@ -17,6 +18,7 @@ void loop() {
 
   readTurbidity();
   readpH();
+  readTDS();
 
 }
 
@@ -47,11 +49,12 @@ void readpH() {
   Serial.print(phValue,2);
   Serial.println(" ");
   delay(800);
+  Serial.println(analogRead(3));
 }
 
 void readTurbidity() {
 
-  int sensorValue = analogRead(A1);
+  int sensorValue = analogRead(1);
   float voltage = sensorValue * (5.0 / 1024.0);
  
   Serial.println ("Sensor Output (V):");
@@ -61,3 +64,7 @@ void readTurbidity() {
 
 }
 
+void readTDS() {
+  Serial.println(analogRead(2));
+
+}
