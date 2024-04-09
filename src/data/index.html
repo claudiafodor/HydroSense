@@ -3,63 +3,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <style>
+    header {
+      background-color: rgba(37,38,40,.21);
+      background-image: radial-gradient(circle at 25%,hsla(0,0%,100%,.2),rgba(50,50,50,.2) 80%);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      height: 44px;
+      width: 100%;
+      top: 0;
+      position: fixed;
+      z-index: 1000;
+    }
+
     body {
-      padding: 0 ;
+      padding: 0;
       margin: 0;
     }
 
     .main {
       background-image: url("./wallpaper.jpeg");
       background-attachment: fixed;
+      background-size: cover;
+      min-height: calc(100vh - 44px);
+      padding-top: 44px;
+      padding-left: 5%;
+      padding-right: 5%;
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
       align-items: center;
-      padding-left: 200px;
-    }
-    .header {
-      width: 100%;
-      padding: 60px;
-      filter: blur(5px);
-      position: fixed;
-      z-index: 2;
-    }
-    .sideBar {
-      width: 130px;
-      height: 100px;
-      position: fixed;
-      z-index: 1;
-      top: 20px;
-      left: 20px;
-      background: #eee;
-    }
-
-    h2 {
-      font-family: "Lucida Console", monospace;
-      font-size: 2.5rem;
-      text-align: center;
-      padding: 2%;
-
+      justify-content: center;
     }
     .box {
-      background-color: aliceblue;
-      border-radius: 15px;
-      margin: 1%;
-      box-shadow: 10px 10px 5px black;
+      flex: 1 0 400px;
+      border-radius: 16px;
+      background-color: rgba(248,248,252,.85);
+      -webkit-backdrop-filter: blur(15px) saturate(86%);
+      backdrop-filter: blur(15px) saturate(86%);
+      background: radial-gradient(circle at 100% 0,hsla(0,0%,100%,.85) 0,hsla(0,0%,96.1%,.13) 183%);
+      margin: 20px;
+      height: 400px;
+      max-width: 800px;
       /*border: 1px solid aqua;*/
     }
     .graph {
-      width: 70%;
-      padding: 5%;
+      padding: 1%;
     }
   </style>
 </head>
 <body>
-  <header class="header">  </header>
+  <header>
+  </header>
   <div class="main">
-    <div class="sideBar">
-
-    </div>
-    <h2 class="box">HydroSense Graphical Data</h2>
     <div id="chart-temperature" class="box graph"></div>
     <div id="chart-humidity" class="box graph"></div>
     <div id="chart-pressure" class="box graph"></div>
@@ -67,7 +61,7 @@
 </body>
 <script>
 var chartT = new Highcharts.Chart({
-  chart:{ renderTo : 'chart-temperature' },
+  chart:{ renderTo : 'chart-temperature', backgroundColor: 'transparent' },
   title: { text: 'Temperature' },
   series: [{
     showInLegend: false,
@@ -106,7 +100,7 @@ setInterval(function ( ) {
 }, 30000 ) ;
 
 var chartH = new Highcharts.Chart({
-  chart:{ renderTo:'chart-humidity' },
+  chart:{ renderTo:'chart-humidity', backgroundColor: 'transparent' },
   title: { text: 'Total Dissolved Solids' },
   series: [{
     showInLegend: false,
@@ -145,7 +139,7 @@ setInterval(function ( ) {
 }, 30000 ) ;
 
 var chartP = new Highcharts.Chart({
-  chart:{ renderTo:'chart-pressure' },
+  chart:{ renderTo:'chart-pressure', backgroundColor: 'transparent' },
   title: { text: 'Turbidity' },
   series: [{
     showInLegend: false,
