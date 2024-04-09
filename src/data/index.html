@@ -26,8 +26,8 @@
       background-size: cover;
       min-height: calc(100vh - 44px);
       padding-top: 44px;
-      padding-left: 5%;
-      padding-right: 5%;
+      padding-left: 10%;
+      padding-right: 10%;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
@@ -48,10 +48,21 @@
     .graph {
       padding: 1%;
     }
+    .title {
+      font-size: 22px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0 0 10px rgba(0,0,0,.5);
+      line-height: 44px;
+      display: block;
+      padding-left: 10px;
+      font-family: Helvetica;
+    }
   </style>
 </head>
 <body>
   <header>
+    <a class="title">HydroSense</a>
   </header>
   <div class="main">
     <div id="chart-temperature" class="box graph"></div>
