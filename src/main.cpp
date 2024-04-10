@@ -23,7 +23,7 @@ void loop() {
 }
 
 void readpH() {
-  for(int i=0;i<10;i++)
+  /*for(int i=0;i<10;i++)
   { 
     buf[i]=analogRead(SensorPin);
     delay(10);
@@ -48,8 +48,8 @@ void readpH() {
   Serial.print("    pH:");  
   Serial.print(phValue,2);
   Serial.println(" ");
-  delay(800);
-  Serial.println(analogRead(3));
+  delay(800); */
+  Serial.println(analogRead(3)*5.0/1024/6);
 }
 
 void readTurbidity() {
@@ -68,3 +68,4 @@ void readTDS() {
   Serial.println(analogRead(2));
 
 }
+
