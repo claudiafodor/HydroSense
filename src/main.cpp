@@ -1,12 +1,12 @@
 #include <heltec.h>
+#include <string>
 #define SensorPin 3
+#define TEMPERATURE 18.0
 unsigned long int avgValue;
 float b;
 int buf[10],temp;
 
-void readTurbidity(); 
-void readpH();
-void readTDS();
+void telemetry();
 
 void setup() {
   
@@ -15,57 +15,54 @@ void setup() {
  }
 
 void loop() {
-
-  readTurbidity();
-  readpH();
-  readTDS();
-
+  telemetry();
 }
 
-void readpH() {
-  /*for(int i=0;i<10;i++)
-  { 
-    buf[i]=analogRead(SensorPin);
-    delay(10);
-  }
-  for(int i=0;i<9;i++)       
-  {
-    for(int j=i+1;j<10;j++)
-    {
-      if(buf[i]>buf[j])
-      {
-        temp=buf[i];
-        buf[i]=buf[j];
-        buf[j]=temp;
-      }
-    }
-  }
-  avgValue=0;
-  for(int i=2;i<8;i++)                      
-    avgValue+=buf[i];
-  float phValue=(float)avgValue*5.0/1024/6; 
-  phValue=3.5*phValue;                   
-  Serial.print("    pH:");  
-  Serial.print(phValue,2);
-  Serial.println(" ");
-  delay(800); */
-  Serial.println(analogRead(3)*5.0/1024/6);
+float readpH() {
+  return analogRead(1)*(5.0/1024/6)*3.5;
 }
 
-void readTurbidity() {
+float readTurbidity() {
 
-  int sensorValue = analogRead(1);
+  int sensorValue = analogRead(2);
   float voltage = sensorValue * (5.0 / 1024.0);
+
+  // Convert percentage to ppm (since 1% = 1000 ppm)
+  double ppm = voltage * 1000.0;
+
+  // According to the formula, 1 ppm = 0.13 NTU
+  double ntu = ppm * 0.13;
  
-  Serial.println ("Sensor Output (V):");
-  Serial.println (voltage);
-  Serial.println();
-  delay(1000);
-
+  return ntu;
 }
 
-void readTDS() {
-  Serial.println(analogRead(2));
+float readTDS() {
+  int sensorValue = analogRead(3);
+    
+  // Convert the analog value to voltage
+  float voltage = sensorValue * (5.0 / 1024.0);
+  
+  // Apply temperature compensation
+  float compensationCoefficient = 1.0 + 0.02 * (TEMPERATURE - 25.0);
+  float compensatedVoltage = voltage / compensationCoefficient;
 
+  // Convert voltage to TDS value
+  float tdsValue = (133.42 * compensatedVoltage * compensatedVoltage * compensatedVoltage
+                    - 255.86 * compensatedVoltage * compensatedVoltage
+                    + 857.39 * compensatedVoltage) * 0.5;
+
+  return tdsValue;
 }
 
+void telemetry() {
+  float pH = readpH();
+  float turbidity = readTurbidity();
+  float tds = readTDS();
+
+  Serial.print("pH: ");
+  Serial.print(pH);
+  Serial.print(", Turbidity: ");
+  Serial.print(turbidity);
+  Serial.print(", TDS: ");
+  Serial.println(tds);
+}
