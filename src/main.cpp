@@ -61,7 +61,7 @@ void telemetry() {
   float pH = readpH();
   float turbidity = readTurbidity();
   float tds = readTDS();
-
+  Serial.println(WiFi.localIP());
   Serial.print("pH: ");
   Serial.print(pH);
   Serial.print(", Turbidity: ");
@@ -74,6 +74,8 @@ void setup(){
   // Serial port for debugging purposes
   Serial.begin(9600);
 
+  while (! Serial);
+  
   bool status; 
   Serial.print("fuck");
 
@@ -87,7 +89,7 @@ void setup(){
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
-    //Serial.println("Connecting to WiFi..");
+    Serial.println("Connecting to WiFi..");
   }
 
   // Print ESP32 Local IP Address
@@ -112,5 +114,5 @@ void setup(){
 }
 
 void loop() {
-  //telemetry();
+  telemetry();
 }
