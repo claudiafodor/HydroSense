@@ -20,9 +20,6 @@ AsyncWebServer server(80);
 
 void telemetry();
 
-void loop() {
-  telemetry();
-}
 
 float readpH() {
   return analogRead(1)*(5.0/1024/6)*3.5;
@@ -78,6 +75,7 @@ void setup(){
   Serial.begin(9600);
 
   bool status; 
+  Serial.print("fuck");
 
   // Initialize SPIFFS
   if(!SPIFFS.begin()){
@@ -111,4 +109,8 @@ void setup(){
 
   // Start server
   server.begin();
+}
+
+void loop() {
+  //telemetry();
 }
