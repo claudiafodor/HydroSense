@@ -5,11 +5,7 @@
 #include <SPIFFS.h>
 #include <Wire.h>
 #include <SPI.h>
-#define SensorPin 3
 #define TEMPERATURE 18.0
-unsigned long int avgValue;
-float b;
-int buf[10],temp;
 
 // Network credentials
 const char* ssid = "ORBI21";
@@ -18,10 +14,10 @@ const char* password = "Smokecat5!";
 // Create AsyncWebServer object on port 80
 AsyncWebServer server(80);
 
-void telemetry();
+//void telemetry();
 
 
-float readpH() {
+/* float readpH() {
   return analogRead(1)*(5.0/1024/6)*3.5;
 }
 
@@ -61,6 +57,7 @@ void telemetry() {
   float pH = readpH();
   float turbidity = readTurbidity();
   float tds = readTDS();
+
   Serial.println(WiFi.localIP());
   Serial.print("pH: ");
   Serial.print(pH);
@@ -68,7 +65,7 @@ void telemetry() {
   Serial.print(turbidity);
   Serial.print(", TDS: ");
   Serial.println(tds);
-}
+} */
 
 void setup(){
   // Serial port for debugging purposes
@@ -96,7 +93,7 @@ void setup(){
   Serial.println(WiFi.localIP());
 
   // Route for root / web page
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+  /* server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(SPIFFS, "/index.html");
   });
   server.on("/ph", HTTP_GET, [](AsyncWebServerRequest *request){
@@ -107,12 +104,12 @@ void setup(){
   });
   server.on("/tds", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send_P(200, "text/plain", String(readTDS()).c_str());
-  });
+  }); */
 
   // Start server
   server.begin();
 }
 
 void loop() {
-  telemetry();
+  //telemetry();
 }
