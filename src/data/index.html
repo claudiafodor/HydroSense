@@ -73,7 +73,7 @@
 <script>
 var chartT = new Highcharts.Chart({
   chart:{ renderTo : 'chart-temperature', backgroundColor: 'transparent' },
-  title: { text: 'Temperature' },
+  title: { text: 'pH' },
   series: [{
     showInLegend: false,
     data: []
@@ -88,7 +88,7 @@ var chartT = new Highcharts.Chart({
     dateTimeLabelFormats: { second: '%H:%M:%S' }
   },
   yAxis: {
-    title: { text: 'Temperature (Celsius)' }
+    title: { text: 'pH' }
   },
   credits: { enabled: false }
 });
@@ -106,13 +106,13 @@ setInterval(function ( ) {
       }
     }
   };
-  xhttp.open("GET", "/temperature", true);
+  xhttp.open("GET", "/ph", true);
   xhttp.send();
 }, 30000 ) ;
 
 var chartH = new Highcharts.Chart({
   chart:{ renderTo:'chart-humidity', backgroundColor: 'transparent' },
-  title: { text: 'Total Dissolved Solids' },
+  title: { text: 'Turbidity' },
   series: [{
     showInLegend: false,
     data: []
@@ -127,7 +127,7 @@ var chartH = new Highcharts.Chart({
     dateTimeLabelFormats: { second: '%H:%M:%S' }
   },
   yAxis: {
-    title: { text: 'TDS (%)' }
+    title: { text: 'NTU' }
   },
   credits: { enabled: false }
 });
@@ -145,13 +145,13 @@ setInterval(function ( ) {
       }
     }
   };
-  xhttp.open("GET", "/humidity", true);
+  xhttp.open("GET", "/turbidity", true);
   xhttp.send();
 }, 30000 ) ;
 
 var chartP = new Highcharts.Chart({
   chart:{ renderTo:'chart-pressure', backgroundColor: 'transparent' },
-  title: { text: 'Turbidity' },
+  title: { text: 'Total Dissolved Solids' },
   series: [{
     showInLegend: false,
     data: []
@@ -167,7 +167,7 @@ var chartP = new Highcharts.Chart({
     dateTimeLabelFormats: { second: '%H:%M:%S' }
   },
   yAxis: {
-    title: { text: 'Turbidity (ppm)' }
+    title: { text: 'TDS (ppm)' }
   },
   credits: { enabled: false }
 });
@@ -185,7 +185,7 @@ setInterval(function ( ) {
       }
     }
   };
-  xhttp.open("GET", "/pressure", true);
+  xhttp.open("GET", "/tds", true);
   xhttp.send();
 }, 30000 ) ;
 </script>

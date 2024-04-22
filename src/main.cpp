@@ -1,18 +1,24 @@
 #include <heltec.h>
 #include <string>
+#include <WiFi.h>
+#include <ESPAsyncWebServer.h>
+#include <SPIFFS.h>
+#include <Wire.h>
+#include <SPI.h>
 #define SensorPin 3
 #define TEMPERATURE 18.0
 unsigned long int avgValue;
 float b;
 int buf[10],temp;
 
+// Network credentials
+const char* ssid = "ORBI21";
+const char* password = "Smokecat5!";
+
+// Create AsyncWebServer object on port 80
+AsyncWebServer server(80);
+
 void telemetry();
-
-void setup() {
-  
-  Serial.begin(9600);
-
- }
 
 void loop() {
   telemetry();
@@ -65,4 +71,44 @@ void telemetry() {
   Serial.print(turbidity);
   Serial.print(", TDS: ");
   Serial.println(tds);
+}
+
+void setup(){
+  // Serial port for debugging purposes
+  Serial.begin(9600);
+
+  bool status; 
+
+  // Initialize SPIFFS
+  if(!SPIFFS.begin()){
+    Serial.println("An Error has occurred while mounting SPIFFS");
+    return;
+  }
+
+  // Connect to Wi-Fi
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    //Serial.println("Connecting to WiFi..");
+  }
+
+  // Print ESP32 Local IP Address
+  Serial.println(WiFi.localIP());
+
+  // Route for root / web page
+  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/index.html");
+  });
+  server.on("/ph", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send_P(200, "text/plain", String(readpH()).c_str());
+  });
+  server.on("/turbidity", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send_P(200, "text/plain", String(readTurbidity()).c_str());
+  });
+  server.on("/tds", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send_P(200, "text/plain", String(readTDS()).c_str());
+  });
+
+  // Start server
+  server.begin();
 }
