@@ -10,20 +10,20 @@
 float lastTelemetry = 0;
 
 // Network credentials
-const char* ssid = "Brereton-IoT";
-const char* password = "IdIoT123";
+const char* ssid = "ORBI21";
+const char* password = "Smokecat5!";
 
 // Create AsyncWebServer object on port 80
 AsyncWebServer server(80);
 
 
 float readpH() {
-  return analogRead(1)*(5.0/1024/6)*3.5;
+  return analogRead(3)*(5.0/1024/6)*3.5;
 }
 
 float readTurbidity() {
 
-  int sensorValue = analogRead(2);
+  int sensorValue = analogRead(1);
   float voltage = sensorValue * (5.0 / 1024.0);
 
   // Convert percentage to ppm (since 1% = 1000 ppm)
@@ -36,7 +36,7 @@ float readTurbidity() {
 }
 
 float readTDS() {
-  int sensorValue = analogRead(3);
+  int sensorValue = analogRead(2);
     
   // Convert the analog value to voltage
   float voltage = sensorValue * (5.0 / 1024.0);
@@ -64,6 +64,7 @@ void telemetry() {
   Serial.print(turbidity);
   Serial.print(", TDS: ");
   Serial.println(tds);
+  Serial.println(WiFi.localIP());
 }
 
 void setup(){
