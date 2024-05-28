@@ -30,7 +30,7 @@ float readTurbidity() {
   double ppm = voltage * 1000.0;
 
   // According to the formula, 1 ppm = 0.13 NTU
-  double ntu = ppm * 0.13;
+  double ntu = (ppm * 0.13)/1000;
  
   return ntu;
 }
@@ -50,7 +50,7 @@ float readTDS() {
                     - 255.86 * compensatedVoltage * compensatedVoltage
                     + 857.39 * compensatedVoltage) * 0.5;
 
-  return tdsValue;
+  return (tdsValue/4.5);
 }
 
 void telemetry() {
